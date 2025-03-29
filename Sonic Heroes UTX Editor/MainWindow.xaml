@@ -1,0 +1,57 @@
+﻿<Window x:Class="Heroes_Text_Editor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Heroes_Text_Editor"
+        mc:Ignorable="d"
+        x:Name="CoreWindow"
+        Title="Sonic Heroes UTX Editor v1.0.0" Height="455" Width="800" MinWidth="600" MinHeight="455" MaxWidth="800" MaxHeight="455" ResizeMode="CanResizeWithGrip" Icon="icon.ico" Closed="CoreWindow_Closed">
+    <DockPanel>
+        <StackPanel DockPanel.Dock="Right">
+            <GroupBox x:Name="GroupBoxFileControls" Header="File Controls" Padding="5" RenderTransformOrigin="0.5,0.5">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button x:Name="Button_OpenUTX" Margin="0,0,5,0" VerticalAlignment="Top" Width="125" Height="30" Click="Button_OpenUTXFile" Content="Open UTX File"/>
+                        <Button x:Name="Button_SaveUTX" VerticalAlignment="Top" Width="125" Height="30" Click="Button_SaveUTXFile" Content="Save UTX File"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,5,35,5" HorizontalAlignment="Right">
+                        <CheckBox x:Name="CheckBox_ChooseWhereToSave" Content="Save As..." ToolTip="Lets you choose the export folder on saving FNT/AFS instead of overwritting."/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="GroupBoxCurrentEntryAttributes" Header="Current Entry" Padding="5">
+                <StackPanel>
+                    <TextBox x:Name="TextBox_EditSubtitle" TextWrapping="NoWrap" AcceptsReturn="True" MinHeight="158" MinWidth="260" MaxWidth="260" MaxHeight="158"/>
+                    <Button x:Name="Button_SaveCurrentEntry" Height="30" Margin="0,5,0,0" Content="Save Entry Changes" Click="Button_SaveCurrentEntry_Click"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox x:Name="GroupBoxMisc" Header="Misc" Height="100">
+                <StackPanel>
+                    <Button x:Name="Button_About" Height="25" Click="Button_About_Click" Width="85" Margin="5">About</Button>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
+                        <CheckBox x:Name="CheckBox_Monospaced_Text" Content="Monospaced Text" ToolTip="Enable for Monospaced Font" Unchecked="CheckBox_MonoSpace_Unchecked" Checked="CheckBox_MonoSpace_Checked"/>
+                        <CheckBox x:Name="CheckBox_DarkMode" Content="Dark Mode Theme" ToolTip="Enable for Dark Mode Theme" Unchecked="CheckBox_DarkMode_Unchecked" Checked="CheckBox_DarkMode_Checked"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Right">
+            <GroupBox x:Name="GroupBoxEntries" Header="Entries" Padding="5">
+                <StackPanel>
+                    <TextBlock x:Name="TextBlock_CurrentEntry_Index" Text="Index: None"/>
+                    <ListBox x:Name="ListBox_Entries" MinHeight="365" MaxHeight="365" MinWidth="280" MaxWidth="280" SelectionChanged="ListBox_Entries_SelectionChanged"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+
+        <StackPanel DockPanel.Dock="Left" MaxWidth="280">
+            <GroupBox x:Name="GroupBoxCollections" Header="Categories" Padding="5">
+                <StackPanel>
+                    <ListBox x:Name="ListBox_Collections" Margin="0,5,0,0" MaxWidth="280" MaxHeight="376" MinHeight="376" SelectionChanged="ListBox_Collection_SelectionChanged"/>
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </DockPanel>
+</Window>
