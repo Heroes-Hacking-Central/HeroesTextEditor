@@ -140,7 +140,11 @@ namespace Heroes_Text_Editor
                 MessageBox.Show("Error, subtitle not found, report this bug and what you did to cause it.", "Impossible Bug. If you see this screenshot it!");
                 return;
             }
-            data[currentCollectionIndex][currentEntryIndex] = TextBox_EditSubtitle.Text;
+            var replacementText = TextBox_EditSubtitle.Text;
+            replacementText = replacementText.Replace("\r\n", "\n");
+            replacementText = replacementText.Replace("\0", "");
+            replacementText += '\0';
+            data[currentCollectionIndex][currentEntryIndex] = replacementText;
             displayCollectionsView.Refresh();
             displayEntriesView.Refresh();
             TextBox_EditSubtitle.Clear();
