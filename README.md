@@ -16,3 +16,6 @@
 * Program icon by RaphaelDrewBoltman
 * Uses modified version of DarkTheme by [Otiel](https://github.com/Otiel)
 * Uses [Ookii.Dialogs](https://github.com/ookii-dialogs/ookii-dialogs-wpf) for dialogs
+
+## How to Build in Release Mode:
+`dotnet publish 'Sonic Heroes UTX Editor.sln' -c Release -r win-x64 --self-contained false /p:PublishSingleFile=true`

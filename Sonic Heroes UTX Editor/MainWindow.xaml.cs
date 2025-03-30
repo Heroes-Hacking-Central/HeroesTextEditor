@@ -16,8 +16,9 @@ namespace Heroes_Text_Editor
     {
         private string fileName;
         private List<List<string>> data;
+        private List<string> categoryLabels;
         private bool isBigEndian = false;
-        private ICollectionView displayCollectionsView, displayEntriesView;
+        private ICollectionView displayEntriesView;
 
         private int currentCollectionIndex = -1;
         private int currentEntryIndex = -1;
@@ -47,8 +48,13 @@ namespace Heroes_Text_Editor
             byte[] readFile = File.ReadAllBytes(dialog.FileName);
             (data, isBigEndian) = UTX.DumpUTX(readFile);
 
-            displayCollectionsView = CollectionViewSource.GetDefaultView(data);
-            ListBox_Collections.ItemsSource = displayCollectionsView;
+            categoryLabels = new List<string>();
+            for(int i = 0; i < data.Count; i++)
+            {
+                categoryLabels.Add("Slot " + i + ":     " + data[i].Count + " entries");
+            }
+
+            ListBox_Collections.ItemsSource = categoryLabels;
         }
         private void Button_SaveUTXFile(object sender, RoutedEventArgs e)
         {
@@ -83,6 +89,10 @@ namespace Heroes_Text_Editor
             if (data != null)
             {
                 data.Clear();
+            }
+            if (categoryLabels != null)
+            {
+                categoryLabels.Clear();
             }
             fileName = "";
             currentCollectionIndex = -1;
@@ -145,7 +155,6 @@ namespace Heroes_Text_Editor
             replacementText = replacementText.Replace("\0", "");
             replacementText += '\0';
             data[currentCollectionIndex][currentEntryIndex] = replacementText;
-            displayCollectionsView.Refresh();
             displayEntriesView.Refresh();
             TextBox_EditSubtitle.Clear();
             ListBox_Entries.SelectedIndex = -1; // trigger deselect-reselect event
